@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CirclePing Event Technology Proposal for Insyder Millennial Meet Up" />
+  <title>CirclePing | Insyder Millennial Meet Up Proposal</title>
+  <style>
+    :root{
+      --cp-blue:#16A8C0;
+      --cp-blue-dark:#0D8FA6;
+      --cp-black:#0D0C11;
+      --cp-ink:#17181C;
+      --cp-muted:#656A73;
+      --cp-soft:#F4F8F9;
+      --cp-line:#DCE7EA;
+      --white:#FFFFFF;
+      --shadow:0 18px 50px rgba(13,12,17,.08);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color:var(--cp-ink);
+      background:#fff;
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1160px, calc(100% - 40px));margin:auto}
+
+    .topbar{
+      background:var(--cp-black);
+      color:#fff;
+      font-size:13px;
+    }
+    .topbar .container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:9px 0;
+    }
+    .topbar span{opacity:.88}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(13,12,17,.07);
+    }
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:17px 0;
+      gap:24px;
+    }
+    .logo{width:220px}
+    .navlinks{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:700}
+    .navlinks a:hover{color:var(--cp-blue)}
+    .nav-cta{
+      background:var(--cp-black);
+      color:#fff;
+      padding:11px 16px;
+      border-radius:12px;
+    }
+
+    .hero{
+      background:
+        radial-gradient(circle at 88% 20%, rgba(22,168,192,.16), transparent 28%),
+        linear-gradient(180deg,#fff 0%,#F7FBFC 100%);
+      padding:74px 0 54px;
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:54px;
+      align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      color:var(--cp-blue-dark);
+      text-transform:uppercase;
+      font-weight:900;
+      letter-spacing:.14em;
+      font-size:12px;
+      margin-bottom:16px;
+    }
+    .eyebrow:before{
+      content:"";
+      width:28px;height:3px;border-radius:5px;background:var(--cp-blue);
+    }
+    h1{
+      margin:0 0 20px;
+      color:var(--cp-black);
+      font-size:clamp(42px,6vw,76px);
+      line-height:.98;
+      letter-spacing:-.055em;
+    }
+    .hero p{
+      max-width:720px;
+      font-size:19px;
+      color:var(--cp-muted);
+      margin:0 0 28px;
+    }
+
+    .hero-card{
+      position:relative;
+      background:var(--cp-black);
+      color:#fff;
+      padding:34px;
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      min-height:420px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+    .hero-card:after{
+      content:"";
+      position:absolute;
+      width:170px;height:170px;border-radius:50%;
+      right:-36px;top:-30px;
+      border:34px solid rgba(22,168,192,.7);
+      border-left-color:transparent;
+      border-bottom-color:transparent;
+      transform:rotate(18deg);
+    }
+    .hero-card h3{font-size:28px;line-height:1.1;margin:0 0 12px;max-width:320px}
+    .hero-card p{font-size:15px;color:rgba(255,255,255,.67);margin:0}
+    .mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:28px}
+    .mini{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.055);
+      border-radius:16px;
+      padding:16px;
+    }
+    .mini strong{display:block;font-size:20px;color:#fff}
+    .mini span{font-size:12px;color:rgba(255,255,255,.62)}
+
+    section{padding:74px 0}
+    .section-head{max-width:760px;margin-bottom:34px}
+    .section-head h2{
+      color:var(--cp-black);
+      margin:0 0 12px;
+      font-size:clamp(30px,4vw,48px);
+      letter-spacing:-.035em;
+      line-height:1.05;
+    }
+    .section-head p{margin:0;color:var(--cp-muted);font-size:17px}
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+    .feature{
+      border:1px solid var(--cp-line);
+      border-radius:var(--radius);
+      padding:24px;
+      background:#fff;
+      min-height:205px;
+    }
+    .feature .icon{
+      width:42px;height:42px;border-radius:12px;
+      display:grid;place-items:center;
+      background:rgba(22,168,192,.11);
+      color:var(--cp-blue-dark);
+      font-weight:900;
+      margin-bottom:18px;
+    }
+    .feature h3{margin:0 0 8px;font-size:18px;color:var(--cp-black)}
+    .feature p{margin:0;color:var(--cp-muted);font-size:14px}
+
+    .costs{background:var(--cp-soft)}
+    .cost-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+    .cost-card{
+      background:#fff;
+      border:1px solid var(--cp-line);
+      border-radius:24px;
+      padding:26px;
+      box-shadow:0 8px 24px rgba(13,12,17,.04);
+    }
+    .cost-card h3{font-size:23px;margin:0 0 5px;color:var(--cp-black)}
+    .cost-card .sub{font-size:14px;color:var(--cp-muted);margin-bottom:20px}
+    table{width:100%;border-collapse:collapse}
+    th{
+      text-align:left;
+      padding:12px 10px;
+      color:var(--cp-blue-dark);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      border-bottom:2px solid var(--cp-blue);
+    }
+    td{padding:15px 10px;border-bottom:1px solid var(--cp-line);vertical-align:top;font-size:14px}
+    td strong{color:var(--cp-black)}
+    .rate{font-weight:900;white-space:nowrap;color:var(--cp-black)}
+    .zero{display:inline-block;background:var(--cp-black);color:#fff;padding:4px 9px;border-radius:20px;font-size:12px;font-weight:800}
+
+    .settlement-wrap{
+      display:grid;
+      grid-template-columns:.82fr 1.18fr;
+      gap:42px;
+      align-items:start;
+    }
+    .statement{
+      background:var(--cp-black);
+      color:#fff;
+      border-radius:28px;
+      padding:32px;
+    }
+    .statement .big{
+      font-size:58px;
+      font-weight:950;
+      letter-spacing:-.05em;
+      color:var(--cp-blue);
+      line-height:1;
+    }
+    .statement h3{font-size:22px;margin:12px 0 8px}
+    .statement p{color:rgba(255,255,255,.66);margin:0;font-size:14px}
+    .steps{display:grid;gap:14px}
+    .step{
+      display:grid;
+      grid-template-columns:48px 1fr;
+      gap:16px;
+      align-items:start;
+      padding:18px;
+      border:1px solid var(--cp-line);
+      border-radius:17px;
+    }
+    .num{
+      width:48px;height:48px;border-radius:14px;
+      display:grid;place-items:center;
+      background:rgba(22,168,192,.11);
+      color:var(--cp-blue-dark);
+      font-weight:950;
+    }
+    .step h4{margin:1px 0 4px;color:var(--cp-black)}
+    .step p{margin:0;color:var(--cp-muted);font-size:14px}
+
+    .summary{
+      background:linear-gradient(135deg,var(--cp-black),#171820);
+      color:#fff;
+      border-radius:34px;
+      padding:46px;
+      position:relative;
+      overflow:hidden;
+    }
+    .summary:before{
+      content:"";
+      position:absolute;
+      width:260px;height:260px;
+      border-radius:50%;
+      border:48px solid rgba(22,168,192,.45);
+      right:-90px;top:-105px;
+    }
+    .summary h2{font-size:42px;line-height:1.05;margin:0 0 15px;max-width:730px}
+    .summary p{max-width:800px;color:rgba(255,255,255,.72);font-size:17px;margin:0 0 24px}
+    .summary-points{display:flex;flex-wrap:wrap;gap:12px}
+    .pill{border:1px solid rgba(255,255,255,.15);padding:10px 14px;border-radius:999px;font-weight:700;font-size:13px;background:rgba(255,255,255,.04)}
+
+    footer{
+      margin-top:74px;
+      background:#F8FAFB;
+      border-top:1px solid var(--cp-line);
+      padding:36px 0;
+    }
+    .footer-grid{display:flex;justify-content:space-between;align-items:center;gap:26px}
+    .footer-logo{width:190px}
+    .footer-meta{text-align:right;color:var(--cp-muted);font-size:13px}
+    .footer-meta strong{color:var(--cp-black)}
+
+    @media (max-width:900px){
+      .hero-grid,.cost-layout,.settlement-wrap{grid-template-columns:1fr}
+      .feature-grid{grid-template-columns:repeat(2,1fr)}
+      .navlinks a:not(.nav-cta){display:none}
+      .hero-card{min-height:340px}
+    }
+    @media (max-width:620px){
+      .container{width:min(100% - 24px,1160px)}
+      .topbar .container{display:block;text-align:center}
+      .logo{width:175px}
+      nav{padding:13px 0}
+      .nav-cta{padding:9px 12px}
+      .feature-grid{grid-template-columns:1fr}
+      .hero{padding-top:48px}
+
+    @media print{
+      header,.topbar,.hero-actions{display:none!important}
+      body{font-size:12px}
+      section,.hero{padding:28px 0}
+      .hero-grid,.cost-layout,.settlement-wrap{grid-template-columns:1fr 1fr}
+      .feature-grid{grid-template-columns:repeat(3,1fr)}
+      .hero-card,.summary{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="container">
+      <span>CirclePing Event Technology Proposal</span>
+      <span>circleping.com · Nairobi, Kenya</span>
+    </div>
+  </div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#top" aria-label="CirclePing home">
+          <img class="logo" src="https://raw.githubusercontent.com/saitnsanto2025/circleping/refs/heads/main/cp_logo_black.png" alt="CirclePing logo">
+        </a>
+        <div class="navlinks">
+          <a href="#included">What's Included</a>
+          <a href="#costs">Costs</a>
+          <a href="#settlement">Settlement</a>
+          
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Event Technology Proposal</div>
+          <h1>Insyder<br>Millennial Meet Up</h1>
+          <p>
+            A complete cashless event ecosystem built around NFC wristbands, M-Pesa ticketing,
+            vendor payments, POS terminals, on-ground event staff and a live organizer dashboard.
+          </p>
+        </div>
+
+        <aside class="hero-card">
+          <div>
+            <div class="eyebrow" style="color:#6fd5e4">CirclePing Package</div>
+            <h3>One connected system from entry to settlement.</h3>
+            <p>Every component in this proposal is provided at cost with no hidden platform or setup fees.</p>
+          </div>
+          <div class="mini-grid">
+            <div class="mini"><strong>NFC</strong><span>Entry + tap-to-pay</span></div>
+            <div class="mini"><strong>M-Pesa</strong><span>STK ticket checkout</span></div>
+            <div class="mini"><strong>Live</strong><span>Organizer dashboard</span></div>
+            <div class="mini"><strong>2%</strong><span>Vendor transaction fee</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="included">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">What's Included</div>
+          <h2>The event operating system, in one package.</h2>
+          <p>
+            CirclePing connects attendee access, ticketing, cashless purchases, vendor operations,
+            event staffing and reporting into a single event experience.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="icon">01</div>
+            <h3>NFC Wristbands</h3>
+            <p>Every attendee receives a wristband for event entry and tap-to-pay purchases across vendors.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">02</div>
+            <h3>M-Pesa Ticketing</h3>
+            <p>Ticketing platform with M-Pesa STK checkout and multi-QR delivery for attendee ticket access.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">03</div>
+            <h3>Cashless Vending</h3>
+            <p>Attendees can pay any vendor with a single wristband tap, reducing dependence on physical cash.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">04</div>
+            <h3>Vendor POS</h3>
+            <p>POS terminals are configured per vendor, or CirclePing can be installed on the vendor's own Android device.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">05</div>
+            <h3>Dedicated Event Staff</h3>
+            <p>On-ground personnel support attendee entry at the gate and operations inside the venue.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">06</div>
+            <h3>Organizer Dashboard</h3>
+            <p>Live visibility into entries, sales and settlement gives organizers one operational view of the event.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="costs" class="costs">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Commercial Structure</div>
+          <h2>Clear costs. No hidden platform fees.</h2>
+          <p>
+            Organizer and vendor costs are separated so each party can understand exactly what they are responsible for.
+          </p>
+        </div>
+
+        <div class="cost-layout">
+          <article class="cost-card">
+            <h3>Organizer Costs</h3>
+            <div class="sub">Billed to the organizer. Wristband cost can be folded into the ticket price.</div>
+            <table>
+              <thead>
+                <tr><th>Item</th><th>Rate</th><th>Notes</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>NFC wristband</strong></td>
+                  <td class="rate">KSH 100 / attendee</td>
+                  <td>Recommended to be folded into ticket price. At 1,000–1,500 pax: KSH 100,000–150,000 carried by attendees.</td>
+                </tr>
+                <tr>
+                  <td><strong>Event staff</strong></td>
+                  <td class="rate">KSH 1,000 / person</td>
+                  <td>20 dedicated members: 10 at the gate and 10 inside. Total KSH 20,000 for the day/evening.</td>
+                </tr>
+                <tr>
+                  <td><strong>Ticketing & cashless platform</strong></td>
+                  <td><span class="zero">Included</span></td>
+                  <td>No setup or platform fee. Provided as part of the package.</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <article class="cost-card">
+            <h3>Vendor Costs</h3>
+            <div class="sub">Billed directly to each vendor. Vendors keep sales apart from the transaction service fee.</div>
+            <table>
+              <thead>
+                <tr><th>Item</th><th>Rate</th><th>Notes</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>POS terminal</strong></td>
+                  <td class="rate">KSH 2,000 / day</td>
+                  <td>Per vendor for the full day/evening. Waived if the vendor supplies their own Android device.</td>
+                </tr>
+                <tr>
+                  <td><strong>CirclePing on own device</strong></td>
+                  <td><span class="zero">No cost</span></td>
+                  <td>CirclePing is installed on the vendor's Android device at no charge.</td>
+                </tr>
+                <tr>
+                  <td><strong>Transaction service fee</strong></td>
+                  <td class="rate">2% / transaction</td>
+                  <td>Vendor receives 98% of each sale. Attendees pay face value with no surcharge at the till.</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="settlement">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Settlement</div>
+          <h2>A simple cashless flow from attendee spend to vendor payout.</h2>
+        </div>
+
+        <div class="settlement-wrap">
+          <div class="statement">
+            <div class="big">98%</div>
+            <h3>Vendor proceeds after the service fee</h3>
+            <p>
+              The vendor receives 98% of every sale after CirclePing's 2% transaction service fee is deducted.
+            </p>
+          </div>
+
+          <div class="steps">
+            <div class="step">
+              <div class="num">1</div>
+              <div>
+                <h4>Attendees load and spend cashlessly</h4>
+                <p>Attendees use their wristbands to make purchases and pay listed menu prices with no added till surcharge.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">2</div>
+              <div>
+                <h4>Takings remain in the CirclePing float</h4>
+                <p>Vendor takings are held in the CirclePing float during the event to support centralized transaction handling.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">3</div>
+              <div>
+                <h4>Vendors are settled after the event</h4>
+                <p>Each vendor is paid after the event with the 2% service fee already deducted.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="num">4</div>
+              <div>
+                <h4>Full transaction breakdown</h4>
+                <p>Each vendor receives a transaction breakdown at settlement for clear reconciliation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:20px">
+      <div class="container">
+        <div class="summary">
+          <div class="eyebrow" style="color:#6fd5e4">Proposal Summary</div>
+          <h2>CirclePing gives the event one connected operational layer.</h2>
+          <p>
+            The organizer's direct outlay is event staff at KSH 20,000 plus wristbands if the cost is not passed to attendees.
+            Vendors cover their own POS where required and the 2% transaction fee. Attendees pay ticket and menu prices only.
+          </p>
+          <div class="summary-points">
+            <span class="pill">No setup fee</span>
+            <span class="pill">No hidden platform fee</span>
+            <span class="pill">NFC entry + payments</span>
+            <span class="pill">M-Pesa ticketing</span>
+            <span class="pill">Vendor settlement reporting</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <img class="footer-logo" src="https://raw.githubusercontent.com/saitnsanto2025/circleping/refs/heads/main/cp_logo_black.png" alt="CirclePing logo">
+      <div class="footer-meta">
+        <strong>Circle Ping Limited</strong><br>
+        Nairobi, Kenya · info@circleping.com · circleping.com
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
